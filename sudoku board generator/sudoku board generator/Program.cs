@@ -12,34 +12,34 @@ namespace sudoku_board_generator
         static string s;
         static void Init(ref int[,] grid2)
         {
-            for(int i = 0; i < 9; i++)
+            for (int i = 0; i < 9; i++)
             {
-                for(int j = 0; j < 9; j++)
+                for (int j = 0; j < 9; j++)
                 {
                     grid2[i, j] = (i * 3 + i / 3 + j) % 9 + 1;
                 }
             }
         }
-        
+        /*
         static void Draw(ref int[,] grid2, out string _s)
         {
-            for(int x = 0; x < 9; x++ )
+            for (int x = 0; x < 9; x++)
             {
-                for(int y=0; y < 9; y++)
+                for (int y = 0; y < 9; y++)
                 {
                     s += grid2[x, y].ToString() + " ";
                 }
-                s += "\n";         
+                s += "\n";
             }
             //s += "\n";  
             Console.WriteLine(s);
             _s = s;
             s = "";
-            
+
         }
-        
+        */
         //used for randomize method
-        /*
+        
         static string Draw(ref int[,] grid2, out string _s)
         {
             for (int x = 0; x < 9; x++)
@@ -53,22 +53,21 @@ namespace sudoku_board_generator
             _s = s;
             return s;            
             s = "";
-
         }
-        */
+        
         static void ChageTwoCell(ref int[,] grid2, int findValue1, int findValue2)
         {
             int xParam1, yParam1, xParam2, yParam2;
             xParam1 = yParam1 = xParam2 = yParam2 = 0;
-            for(int i = 0; i < 9; i+=3)
+            for (int i = 0; i < 9; i += 3)
             {
-                for(int k = 0; k < 9; k+=3)
+                for (int k = 0; k < 9; k += 3)
                 {
-                    for(int j = 0; j < 3; j++)
+                    for (int j = 0; j < 3; j++)
                     {
                         for (int z = 0; z < 3; z++)
                         {
-                            if(grid2[i+j, k+z] == findValue1)
+                            if (grid2[i + j, k + z] == findValue1)
                             {
                                 xParam1 = i + j;
                                 yParam1 = k + z;
@@ -88,25 +87,21 @@ namespace sudoku_board_generator
 
         static void Update(ref int[,] grid2, int shuffleLevel)
         {
-            for(int repeat = 0; repeat < shuffleLevel; repeat++)
+            for (int repeat = 0; repeat < shuffleLevel; repeat++)
             {
                 Random rand = new Random(Guid.NewGuid().GetHashCode());
                 Random rand2 = new Random(Guid.NewGuid().GetHashCode());
                 ChageTwoCell(ref grid2, rand.Next(1, 9), rand2.Next(1, 9));
             }
         }
-        /*
+        
         static string Randomize(ref int[,] grid2, string s)
         {
-            s = "";
-            string output;
-            Init(ref grid2);
-            Update(ref grid2, 10);
+            string output;                        
             s = Draw(ref grid2, out output);
             string outputStr = s;
             // above is getting the string  
             //below is randomly adding 0's to the string for the user to solve 
-
             int numReplace = 49;
             int replacedAmt = 0;
             while (replacedAmt != numReplace)
@@ -120,13 +115,13 @@ namespace sudoku_board_generator
                     replacedAmt++;
                 }
             }
-
             //Console.Write(outputStr);
             return s;
         }
-        */
+        
 
         //for printing random board
+        /*
         static void Main(string[] args)
         {
             s = "";
@@ -137,17 +132,18 @@ namespace sudoku_board_generator
             Console.Write(s);
             Console.ReadKey();
         }
-       
+        */
         //for printing random board thats needs to be filled in.
-        /*
+        
         static void Main(string[] args)
         {
-            s = "";
-            string output;
+            s = "";           
+            Init(ref grid2);
+            Update(ref grid2, 10);            
             s = Randomize(ref grid2, s);
             Console.Write(s);
             Console.ReadKey();
         }
-        */
+        
     }
 }
