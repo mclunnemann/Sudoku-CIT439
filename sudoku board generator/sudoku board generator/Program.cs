@@ -20,28 +20,42 @@ namespace sudoku_board_generator
                 }
             }
         }
-        /*
-        static void Draw(ref int[,] grid2, out string _s)
+        
+        static void DrawGrid(ref int[,] grid2, string draw)
         {
+            string grid="";
             for (int x = 0; x < 9; x++)
             {
                 for (int y = 0; y < 9; y++)
                 {
-                    s += grid2[x, y].ToString() + " ";
+                    grid += draw.Substring(x+y,1).ToString()+ " ";
                 }
-                s += "\n";
+                grid += "\n";
             }
-            //s += "\n";  
-            Console.WriteLine(s);
-            _s = s;
-            s = "";
-
+            //Console.WriteLine(grid);
         }
-        */
-        //used for randomize method
-        
-        static string Draw(ref int[,] grid2, out string _s)
+
+        static void Solve_DrawGrid(string draw)
         {
+            System.Threading.Thread.Sleep(1000);
+            Console.Clear();
+            //Console.WriteLine(draw + "\n");
+            string grid = "";
+            for (int x = 0; x < 9; x++)
+            {
+                for (int y = 0; y < 9; y++)
+                {
+                    grid += draw.Substring(x + y, 1).ToString() + " ";                    
+                }
+                grid += "\n";
+            }
+            Console.WriteLine(grid);                       
+        }
+        
+        //used for randomize method
+
+        static string Draw(ref int[,] grid2, out string _s)
+        {            
             for (int x = 0; x < 9; x++)
             {
                 for (int y = 0; y < 9; y++)
@@ -49,12 +63,12 @@ namespace sudoku_board_generator
                     s += grid2[x, y].ToString();
                 }
                 //s += "\n";
-            }            
+            }
             _s = s;
-            return s;            
+            return s;
             s = "";
         }
-        
+
         static void ChageTwoCell(ref int[,] grid2, int findValue1, int findValue2)
         {
             int xParam1, yParam1, xParam2, yParam2;
@@ -94,10 +108,10 @@ namespace sudoku_board_generator
                 ChageTwoCell(ref grid2, rand.Next(1, 9), rand2.Next(1, 9));
             }
         }
-        
+
         static string Randomize(ref int[,] grid2, string s)
         {
-            string output;                        
+            string output;
             s = Draw(ref grid2, out output);
             string outputStr = s;
             // above is getting the string  
@@ -118,32 +132,24 @@ namespace sudoku_board_generator
             //Console.Write(outputStr);
             return s;
         }
-        
+
 
         //for printing random board
-        /*
+        
         static void Main(string[] args)
         {
             s = "";
-            string output;
+            string output;            
             Init(ref grid2);
             Update(ref grid2, 10);
-            Draw(ref grid2, out output);
-            Console.Write(s);
+            //Draw(ref grid2, out output);
+            output = Randomize(ref grid2, s);
+            //Console.Write(s);
+           // Console.Write("\n" + output + "\n");
+            DrawGrid(ref grid2, output);
+            Solve_DrawGrid(output);
+            Solve_DrawGrid(s);
             Console.ReadKey();
-        }
-        */
-        //for printing random board thats needs to be filled in.
-        
-        static void Main(string[] args)
-        {
-            s = "";           
-            Init(ref grid2);
-            Update(ref grid2, 10);            
-            s = Randomize(ref grid2, s);
-            Console.Write(s);
-            Console.ReadKey();
-        }
-        
+        }        
     }
 }
