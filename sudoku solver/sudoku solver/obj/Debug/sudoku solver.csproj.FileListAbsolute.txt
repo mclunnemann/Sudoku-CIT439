@@ -10,9 +10,9 @@ C:\Users\Michael.Lunnemann\Documents\Visual Studio 2015\Projects\CSC439-OS-Sudok
 C:\Users\Michael.Lunnemann\Documents\Visual Studio 2015\Projects\CSC439-OS-Sudoku-master\sudoku solver\sudoku solver\bin\Debug\sudoku solver.exe
 C:\Users\Michael.Lunnemann\Documents\Visual Studio 2015\Projects\CSC439-OS-Sudoku-master\sudoku solver\sudoku solver\bin\Debug\sudoku solver.pdb
 C:\Users\Michael.Lunnemann\Documents\Visual Studio 2015\Projects\CSC439-OS-Sudoku-master\sudoku solver\sudoku solver\obj\Debug\sudoku solver.csprojResolveAssemblyReference.cache
-C:\Users\Michael.Lunnemann\Documents\Visual Studio 2015\Projects\CSC439-OS-Sudoku-master - Copy\sudoku solver\sudoku solver\bin\Debug\sudoku solver.exe.config
-C:\Users\Michael.Lunnemann\Documents\Visual Studio 2015\Projects\CSC439-OS-Sudoku-master - Copy\sudoku solver\sudoku solver\obj\Debug\sudoku solver.exe
-C:\Users\Michael.Lunnemann\Documents\Visual Studio 2015\Projects\CSC439-OS-Sudoku-master - Copy\sudoku solver\sudoku solver\obj\Debug\sudoku solver.pdb
-C:\Users\Michael.Lunnemann\Documents\Visual Studio 2015\Projects\CSC439-OS-Sudoku-master - Copy\sudoku solver\sudoku solver\bin\Debug\sudoku solver.exe
-C:\Users\Michael.Lunnemann\Documents\Visual Studio 2015\Projects\CSC439-OS-Sudoku-master - Copy\sudoku solver\sudoku solver\bin\Debug\sudoku solver.pdb
-C:\Users\Michael.Lunnemann\Documents\Visual Studio 2015\Projects\CSC439-OS-Sudoku-master - Copy\sudoku solver\sudoku solver\obj\Debug\sudoku solver.csprojResolveAssemblyReference.cache
+C:\Users\Michael.Lunnemann\Documents\Visual Studio 2015\Projects\Sudoku CIT439\CSC439-OS-Sudoku-master - org\sudoku solver\sudoku solver\bin\Debug\sudoku solver.exe.config
+C:\Users\Michael.Lunnemann\Documents\Visual Studio 2015\Projects\Sudoku CIT439\CSC439-OS-Sudoku-master - org\sudoku solver\sudoku solver\obj\Debug\sudoku solver.exe
+C:\Users\Michael.Lunnemann\Documents\Visual Studio 2015\Projects\Sudoku CIT439\CSC439-OS-Sudoku-master - org\sudoku solver\sudoku solver\obj\Debug\sudoku solver.pdb
+C:\Users\Michael.Lunnemann\Documents\Visual Studio 2015\Projects\Sudoku CIT439\CSC439-OS-Sudoku-master - org\sudoku solver\sudoku solver\bin\Debug\sudoku solver.exe
+C:\Users\Michael.Lunnemann\Documents\Visual Studio 2015\Projects\Sudoku CIT439\CSC439-OS-Sudoku-master - org\sudoku solver\sudoku solver\bin\Debug\sudoku solver.pdb
+C:\Users\Michael.Lunnemann\Documents\Visual Studio 2015\Projects\Sudoku CIT439\CSC439-OS-Sudoku-master - org\sudoku solver\sudoku solver\obj\Debug\sudoku solver.csprojResolveAssemblyReference.cache
