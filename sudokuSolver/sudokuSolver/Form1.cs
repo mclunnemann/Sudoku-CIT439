@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.VisualBasic;
 
 namespace sudokuSolver
 {
@@ -31,6 +32,7 @@ namespace sudokuSolver
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            inputText.Visible = false;
             setUpBoard();
         }
 
@@ -53,32 +55,40 @@ namespace sudokuSolver
         {
             puzzle = "";
             answer = "";
-            sudoku.Randomize(out answer, out puzzle);
-            label1.Text = puzzle;
-            label2.Text = answer;
-            int letter = 0;
-            char[] letters = new char[puzzle.Length];
-            for (int i = 0; i < letters.Length; i++)
+            if (btn_import.Visible == true)
             {
-                letters[i] = puzzle[i];
+                puzzle = inputText.Text;
+                answer = sudoku.solver(puzzle);
             }
-            foreach (DataGridViewRow i in DGV.Rows)
+            else
             {
-                foreach (DataGridViewCell j in i.Cells)
+                sudoku.Randomize(out answer, out puzzle);
+            }
+                label1.Text = puzzle;
+                label2.Text = answer;
+                int letter = 0;
+                char[] letters = new char[puzzle.Length];
+                for (int i = 0; i < letters.Length; i++)
                 {
-                    if (letters[letter] == '0')
-                    {
-                        letters[letter] = ' ';
-                    }
-                    else
-                    {
-                        j.Value = letters[letter];
-                        j.Style.BackColor = Color.LightGray;
-                        j.ReadOnly = true;
-                    }
-                    letter++;
+                    letters[i] = puzzle[i];
                 }
-            }
+                foreach (DataGridViewRow i in DGV.Rows)
+                {
+                    foreach (DataGridViewCell j in i.Cells)
+                    {
+                        if (letters[letter] == '0')
+                        {
+                            letters[letter] = ' ';
+                        }
+                        else
+                        {
+                            j.Value = letters[letter];
+                            j.Style.BackColor = Color.LightGray;
+                            j.ReadOnly = true;
+                        }
+                        letter++;
+                    }
+                }            
         }
         private void setUpBoard()
         {
@@ -121,7 +131,18 @@ namespace sudokuSolver
 
         private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            newGame();
+            if (!easy && !medium && !hard)
+            {
+                MessageBox.Show("Please Select a difficulty.");
+            }
+            else
+            {
+                btn_import.Visible = false;
+                inputText.Visible = false;
+                inputText.Text = "";
+
+                newGame();
+            }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -211,7 +232,17 @@ namespace sudokuSolver
 
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(this.inputText.Text);
+            label1.Text = "";
+            label2.Text = "";
+            inputText.Visible = true;
+            btn_import.Visible = true;
+            resetBoard();
+            string inputSudoku = inputText.Text;
+        }
+
+        private void btn_import_Click(object sender, EventArgs e)
+        {
+            fillGrid();
         }
 
         private void resetBoard()

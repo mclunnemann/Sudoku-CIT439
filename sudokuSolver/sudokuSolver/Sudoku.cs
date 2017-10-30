@@ -14,7 +14,6 @@ namespace sudokuSolver
         public Sudoku()
         {
             int[,] grid2 = new int[9, 9];
-            //string s;
         }
 
         void Init(ref int[,] grid2)
@@ -39,14 +38,12 @@ namespace sudokuSolver
                 }
                 grid += "\n";
             }
-            //Console.WriteLine(grid);
         }
 
         public void Solve_DrawGrid(string draw)
         {
             System.Threading.Thread.Sleep(1000);
             Console.Clear();
-            //Console.WriteLine(draw + "\n");
             string grid = "";
             for (int x = 0; x < 9; x++)
             {
@@ -60,7 +57,6 @@ namespace sudokuSolver
         }
 
         //used for randomize method
-
         public string Draw(ref int[,] grid2, out string _s)
         {
             for (int x = 0; x < 9; x++)
@@ -69,7 +65,6 @@ namespace sudokuSolver
                 {
                     s += grid2[x, y].ToString();
                 }
-                //s += "\n";
             }
             _s = s;
             return s;
@@ -119,7 +114,6 @@ namespace sudokuSolver
         {
             Init(ref grid2);
             Update(ref grid2, 10);
-            // Draw(ref grid2, out output);
             s = "";
             s = Draw(ref grid2, out answer);
             // above is getting the string  
@@ -159,26 +153,104 @@ namespace sudokuSolver
                     replacedAmt++;
                 }
             }
-            //Console.Write(outputStr);
             return puzzle = s;
         }
 
+        //solver
+        public static bool SolveSudoku(int[,] puzzle, int row, int col)
+        {
+            if (row < 9 && col < 9)
+            {
+                if (puzzle[row, col] != 0)
+                {
+                    if ((col + 1) < 9) return SolveSudoku(puzzle, row, col + 1);
+                    else if ((row + 1) < 9) return SolveSudoku(puzzle, row + 1, 0);
+                    else return true;
+                }
+                else
+                {
+                    for (int i = 0; i < 9; ++i)
+                    {
+                        if (IsAvailable(puzzle, row, col, i + 1))
+                        {
+                            puzzle[row, col] = i + 1;
 
-        //for printing random board
+                            if ((col + 1) < 9)
+                            {
+                                if (SolveSudoku(puzzle, row, col + 1)) return true;
+                                else puzzle[row, col] = 0;
+                            }
+                            else if ((row + 1) < 9)
+                            {
+                                if (SolveSudoku(puzzle, row + 1, 0)) return true;
+                                else puzzle[row, col] = 0;
+                            }
+                            else return true;
+                        }
+                    }
+                }
 
-        //static void Main(string[] args) {
-        //	s = "";
-        //	string output;
-        //	//Init(ref grid2);
-        //	//Update(ref grid2, 10);
-        //	//Draw(ref grid2, out output);
-        //	//output = Randomize(ref grid2, s);
-        //	//Console.Write(s);
-        //	// Console.Write("\n" + output + "\n");
-        //	//DrawGrid(output);
-        //	//Solve_DrawGrid(output);
-        //	//Solve_DrawGrid(s);
-        //	Console.ReadKey();
-        //}
+                return false;
+            }
+            else return true;
+        }
+
+        private static bool IsAvailable(int[,] puzzle, int row, int col, int num)
+        {
+            int rowStart = (row / 3) * 3;
+            int colStart = (col / 3) * 3;
+
+            for (int i = 0; i < 9; ++i)
+            {
+                if (puzzle[row, i] == num) return false;
+                if (puzzle[i, col] == num) return false;
+                if (puzzle[rowStart + (i % 3), colStart + (i / 3)] == num) return false;
+            }
+
+            return true;
+        }
+
+        public string solver(string str)
+        {            
+            int[] vals = new int[81];
+            for (int q = 0; q < 81; q++)
+            {
+                string s = str[q].ToString();
+                vals[q] = Int32.Parse(s);
+            }
+            int[,] puzzle = new int[9, 9];
+            //* test strings
+            //470200809050069003009000201000008000010604002600700510025106007100900020000320080
+            //473251869251869473869473251732518694518694732694732518325186947186947325947325186
+
+            //607040509008530607030027008001400306080090201096201405714800960050902004060700850       
+            //627148539148539627539627148271485396485396271396271485714853962853962714962714853
+
+            int i = 0;
+
+            for (int row = 0; row < 9; row++)
+            {
+                for (int col = 0; col < 9; col++)
+                {
+                    puzzle[row, col] = vals[i];
+                    i++;
+                }
+            }
+
+            string fininshedPuzzle = "";
+
+            if (SolveSudoku(puzzle, 0, 0))
+            {
+                for (int row = 0; row < 9; row++)
+                {
+                    for (int col = 0; col < 9; col++)
+                    {
+                        fininshedPuzzle += puzzle[row, col];
+                    }
+                }
+                return fininshedPuzzle;
+            }
+            return fininshedPuzzle;
+        }
     }
 }
