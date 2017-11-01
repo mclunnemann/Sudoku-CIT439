@@ -63,7 +63,7 @@
             this.difficultyToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(731, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(518, 24);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
@@ -132,7 +132,7 @@
             // 
             // inputText
             // 
-            this.inputText.Location = new System.Drawing.Point(204, 487);
+            this.inputText.Location = new System.Drawing.Point(178, 489);
             this.inputText.Multiline = true;
             this.inputText.Name = "inputText";
             this.inputText.Size = new System.Drawing.Size(150, 40);
@@ -140,7 +140,7 @@
             // 
             // btn_import
             // 
-            this.btn_import.Location = new System.Drawing.Point(204, 533);
+            this.btn_import.Location = new System.Drawing.Point(178, 535);
             this.btn_import.Name = "btn_import";
             this.btn_import.Size = new System.Drawing.Size(74, 23);
             this.btn_import.TabIndex = 5;
@@ -151,7 +151,7 @@
             // 
             // btn_Solve
             // 
-            this.btn_Solve.Location = new System.Drawing.Point(280, 533);
+            this.btn_Solve.Location = new System.Drawing.Point(254, 535);
             this.btn_Solve.Name = "btn_Solve";
             this.btn_Solve.Size = new System.Drawing.Size(74, 23);
             this.btn_Solve.TabIndex = 6;
@@ -164,7 +164,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(731, 586);
+            this.ClientSize = new System.Drawing.Size(518, 586);
             this.Controls.Add(this.btn_Solve);
             this.Controls.Add(this.btn_import);
             this.Controls.Add(this.inputText);

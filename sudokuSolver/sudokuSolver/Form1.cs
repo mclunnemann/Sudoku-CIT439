@@ -98,7 +98,7 @@ namespace sudokuSolver
             } catch(Exception e)
             {
                 resetBoard();
-                MessageBox.Show("Invalid Sudoku Board Input. Please Enter a valid sudoku Board.");                
+                MessageBox.Show("Invalid Sudoku Board Input. Please Enter a valid sudoku Board.");            
             }          
         }
 
