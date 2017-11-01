@@ -36,6 +36,7 @@
             this.hardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.inputText = new System.Windows.Forms.TextBox();
             this.btn_import = new System.Windows.Forms.Button();
+            this.btn_Solve = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -138,20 +139,32 @@
             // 
             // btn_import
             // 
-            this.btn_import.Location = new System.Drawing.Point(607, 447);
+            this.btn_import.Location = new System.Drawing.Point(550, 443);
             this.btn_import.Name = "btn_import";
-            this.btn_import.Size = new System.Drawing.Size(92, 23);
+            this.btn_import.Size = new System.Drawing.Size(74, 23);
             this.btn_import.TabIndex = 5;
             this.btn_import.Text = "Import";
             this.btn_import.UseVisualStyleBackColor = true;
             this.btn_import.Visible = false;
             this.btn_import.Click += new System.EventHandler(this.btn_import_Click);
             // 
+            // btn_Solve
+            // 
+            this.btn_Solve.Location = new System.Drawing.Point(626, 443);
+            this.btn_Solve.Name = "btn_Solve";
+            this.btn_Solve.Size = new System.Drawing.Size(74, 23);
+            this.btn_Solve.TabIndex = 6;
+            this.btn_Solve.Text = "Solve";
+            this.btn_Solve.UseVisualStyleBackColor = true;
+            this.btn_Solve.Visible = false;
+            this.btn_Solve.Click += new System.EventHandler(this.btn_Solve_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 516);
+            this.Controls.Add(this.btn_Solve);
             this.Controls.Add(this.btn_import);
             this.Controls.Add(this.inputText);
             this.Controls.Add(this.label2);
@@ -182,6 +195,7 @@
 		private System.Windows.Forms.ToolStripMenuItem hardToolStripMenuItem;
 		private System.Windows.Forms.TextBox inputText;
         private System.Windows.Forms.Button btn_import;
+        private System.Windows.Forms.Button btn_Solve;
     }
 }
 

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
+using System.Timers;
 
 namespace sudokuSolver
 {
@@ -18,7 +19,7 @@ namespace sudokuSolver
         public static bool medium;
         public static bool hard;
 
-        string puzzle, answer;
+        string puzzle = "", answer = "";
         const int cColWidth = 45;
         const int cRowHeigth = 45;
         const int cMaxCell = 9;
@@ -53,17 +54,17 @@ namespace sudokuSolver
         }
         private void fillGrid()
         {
-            puzzle = "";
-            answer = "";
-            if (btn_import.Visible == true)
+            try
             {
-                puzzle = inputText.Text;
-                answer = sudoku.solver(puzzle);
-            }
-            else
-            {
-                sudoku.Randomize(out answer, out puzzle);
-            }
+                if (btn_import.Visible == true)
+                {
+                    puzzle = inputText.Text;
+                    answer = sudoku.solver(puzzle);
+                }
+                else
+                {
+                    sudoku.Randomize(out answer, out puzzle);
+                }
                 label1.Text = puzzle;
                 label2.Text = answer;
                 int letter = 0;
@@ -88,8 +89,43 @@ namespace sudokuSolver
                         }
                         letter++;
                     }
-                }            
+                }
+            } catch(Exception e)
+            {
+                resetBoard();
+                MessageBox.Show("Invalid Sudoku Board Input. Please Enter a valid sudoku Board.");                
+            }          
         }
+
+        private async void fillSolvedGrid(string puzzle)
+        {
+            int letter = 0;
+            char[] letters = new char[puzzle.Length];
+            for (int i = 0; i < letters.Length; i++)
+            {
+                letters[i] = puzzle[i];
+            }
+            foreach (DataGridViewRow i in DGV.Rows)
+            {
+                foreach (DataGridViewCell j in i.Cells)
+                {
+                    if (letters[letter] == '0')
+                    {
+                        letters[letter] = ' ';
+                    }
+                    else
+                    {
+                        j.Value = letters[letter];
+                        j.Style.BackColor = Color.LightGray;
+                        j.ReadOnly = true;
+                    }
+                    await Task.Delay(500);
+                    letter++;                    
+                }
+            }
+            MessageBox.Show("Problem Solved!");
+        }
+
         private void setUpBoard()
         {
             DGV = new DataGridView();
@@ -138,6 +174,7 @@ namespace sudokuSolver
             else
             {
                 btn_import.Visible = false;
+                btn_Solve.Visible = false;
                 inputText.Visible = false;
                 inputText.Text = "";
 
@@ -235,14 +272,22 @@ namespace sudokuSolver
             label1.Text = "";
             label2.Text = "";
             inputText.Visible = true;
-            btn_import.Visible = true;
+            btn_import.Visible = true;            
             resetBoard();
             string inputSudoku = inputText.Text;
         }
 
         private void btn_import_Click(object sender, EventArgs e)
         {
+            resetBoard();    
             fillGrid();
+            btn_Solve.Visible = true;
+        }
+
+        private void btn_Solve_Click(object sender, EventArgs e)
+        {
+            fillSolvedGrid(answer);
+
         }
 
         private void resetBoard()

@@ -211,46 +211,54 @@ namespace sudokuSolver
         }
 
         public string solver(string str)
-        {            
-            int[] vals = new int[81];
-            for (int q = 0; q < 81; q++)
-            {
-                string s = str[q].ToString();
-                vals[q] = Int32.Parse(s);
-            }
-            int[,] puzzle = new int[9, 9];
-            //* test strings
-            //470200809050069003009000201000008000010604002600700510025106007100900020000320080
-            //473251869251869473869473251732518694518694732694732518325186947186947325947325186
-
-            //607040509008530607030027008001400306080090201096201405714800960050902004060700850       
-            //627148539148539627539627148271485396485396271396271485714853962853962714962714853
-
-            int i = 0;
-
-            for (int row = 0; row < 9; row++)
-            {
-                for (int col = 0; col < 9; col++)
+        {
+            try {
+                int[] vals = new int[81];
+                for (int q = 0; q < 81; q++)
                 {
-                    puzzle[row, col] = vals[i];
-                    i++;
+                    string s = str[q].ToString();
+                    vals[q] = Int32.Parse(s);
                 }
-            }
+                int[,] puzzle = new int[9, 9];
+                //* test strings
+                //470200809050069003009000201000008000010604002600700510025106007100900020000320080
+                //473251869251869473869473251732518694518694732694732518325186947186947325947325186
 
-            string fininshedPuzzle = "";
+                //607040509008530607030027008001400306080090201096201405714800960050902004060700850       
+                //627148539148539627539627148271485396485396271396271485714853962853962714962714853
 
-            if (SolveSudoku(puzzle, 0, 0))
-            {
+                int i = 0;
+
                 for (int row = 0; row < 9; row++)
                 {
                     for (int col = 0; col < 9; col++)
                     {
-                        fininshedPuzzle += puzzle[row, col];
+                        puzzle[row, col] = vals[i];
+                        i++;
                     }
                 }
-                return fininshedPuzzle;
+
+                string fininshedPuzzle = "";
+
+                if (SolveSudoku(puzzle, 0, 0))
+                {
+                    for (int row = 0; row < 9; row++)
+                    {
+                        for (int col = 0; col < 9; col++)
+                        {
+                            fininshedPuzzle += puzzle[row, col];
+                        }
+                    }
+                    return fininshedPuzzle;
+                }
+                else
+                {
+                    return "False";
+                }
+            }catch(Exception e)
+            {
+                return "False";
             }
-            return fininshedPuzzle;
         }
     }
 }
