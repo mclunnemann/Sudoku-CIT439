@@ -33,7 +33,12 @@ namespace sudokuSolver
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            inputText.Visible = false;
+            inputText.Visible = true;
+            inputText.Enabled = false;
+            btn_import.Visible = true;
+            btn_import.Enabled = false;
+            btn_Solve.Visible = true;
+            btn_Solve.Enabled = false;
             setUpBoard();
         }
 
@@ -56,7 +61,7 @@ namespace sudokuSolver
         {
             try
             {
-                if (btn_import.Visible == true)
+                if (btn_import.Enabled == true)
                 {
                     puzzle = inputText.Text;
                     answer = sudoku.solver(puzzle);
@@ -124,6 +129,10 @@ namespace sudokuSolver
                 }
             }
             MessageBox.Show("Problem Solved!");
+            btn_Solve.Enabled = false;
+            btn_import.Enabled = false;
+            inputText.Clear();
+            inputText.Enabled = false;
         }
 
         private void setUpBoard()
@@ -173,9 +182,7 @@ namespace sudokuSolver
             }
             else
             {
-                btn_import.Visible = false;
-                btn_Solve.Visible = false;
-                inputText.Visible = false;
+                btn_Solve.Enabled = true;
                 inputText.Text = "";
 
                 newGame();
@@ -272,7 +279,9 @@ namespace sudokuSolver
             label1.Text = "";
             label2.Text = "";
             inputText.Visible = true;
-            btn_import.Visible = true;            
+            inputText.Enabled = true;
+            btn_import.Visible = true;
+            btn_import.Enabled = true;           
             resetBoard();
             string inputSudoku = inputText.Text;
         }
@@ -281,12 +290,17 @@ namespace sudokuSolver
         {
             resetBoard();    
             fillGrid();
-            btn_Solve.Visible = true;
+            btn_Solve.Enabled = true;            
         }
 
         private void btn_Solve_Click(object sender, EventArgs e)
         {
             fillSolvedGrid(answer);
+
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
 
         }
 
