@@ -34,6 +34,7 @@
             this.easyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mediumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.inputText = new System.Windows.Forms.TextBox();
             this.btn_import = new System.Windows.Forms.Button();
             this.btn_Solve = new System.Windows.Forms.Button();
@@ -42,9 +43,9 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(550, 161);
+            this.label1.Location = new System.Drawing.Point(550, 130);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(168, 108);
+            this.label1.Size = new System.Drawing.Size(63, 165);
             this.label1.TabIndex = 1;
             this.label1.Text = "label1";
             // 
@@ -52,7 +53,7 @@
             // 
             this.label2.Location = new System.Drawing.Point(553, 295);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(165, 98);
+            this.label2.Size = new System.Drawing.Size(63, 165);
             this.label2.TabIndex = 2;
             this.label2.Text = "label2";
             // 
@@ -60,10 +61,11 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.difficultyToolStripMenuItem});
+            this.difficultyToolStripMenuItem,
+            this.checkToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(518, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(621, 24);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
@@ -130,6 +132,13 @@
             this.hardToolStripMenuItem.Text = "Hard";
             this.hardToolStripMenuItem.Click += new System.EventHandler(this.hardToolStripMenuItem_Click);
             // 
+            // checkToolStripMenuItem
+            // 
+            this.checkToolStripMenuItem.Name = "checkToolStripMenuItem";
+            this.checkToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.checkToolStripMenuItem.Text = "Check";
+            this.checkToolStripMenuItem.Click += new System.EventHandler(this.checkToolStripMenuItem_Click);
+            // 
             // inputText
             // 
             this.inputText.Location = new System.Drawing.Point(178, 489);
@@ -164,7 +173,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(518, 586);
+            this.ClientSize = new System.Drawing.Size(621, 586);
             this.Controls.Add(this.btn_Solve);
             this.Controls.Add(this.btn_import);
             this.Controls.Add(this.inputText);
@@ -197,6 +206,7 @@
 		private System.Windows.Forms.TextBox inputText;
         private System.Windows.Forms.Button btn_import;
         private System.Windows.Forms.Button btn_Solve;
+        private System.Windows.Forms.ToolStripMenuItem checkToolStripMenuItem;
     }
 }
 

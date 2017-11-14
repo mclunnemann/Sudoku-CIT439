@@ -20,6 +20,7 @@ namespace sudokuSolver
         public static bool hard;
 
         string puzzle = "", answer = "";
+        //string checkedString = "";
         const int cColWidth = 45;
         const int cRowHeigth = 45;
         const int cMaxCell = 9;
@@ -34,11 +35,14 @@ namespace sudokuSolver
         private void Form1_Load(object sender, EventArgs e)
         {
             inputText.Visible = true;
-            inputText.Enabled = false;
+            inputText.Enabled = true;//
             btn_import.Visible = true;
-            btn_import.Enabled = false;
+            btn_import.Enabled = true;//
             btn_Solve.Visible = true;
             btn_Solve.Enabled = false;
+            easyToolStripMenuItem.Checked = true;
+            checkToolStripMenuItem.Enabled = false;
+            easy = true;
             setUpBoard();
         }
 
@@ -61,16 +65,22 @@ namespace sudokuSolver
         {
             try
             {
+                checkToolStripMenuItem.Enabled = true;
                 if (btn_import.Enabled == true)
                 {
-                    puzzle = inputText.Text;
-                    answer = sudoku.solver(puzzle);
+                    if (inputText.Text != "")
+                    {
+                        puzzle = inputText.Text;
+                    }
+                    answer = sudoku.solver(puzzle);                    
                 }
                 else
                 {
                     sudoku.Randomize(out answer, out puzzle);
                 }
+                label1.Text = "";
                 label1.Text = puzzle;
+                label2.Text = "";
                 label2.Text = answer;
                 int letter = 0;
                 char[] letters = new char[puzzle.Length];
@@ -95,11 +105,12 @@ namespace sudokuSolver
                         letter++;
                     }
                 }
-            } catch(Exception e)
+            }
+            catch (Exception e)
             {
                 resetBoard();
-                MessageBox.Show("Invalid Sudoku Board Input. Please Enter a valid sudoku Board.");            
-            }          
+                MessageBox.Show("Invalid Sudoku Board Input. Please Enter a valid sudoku Board.\n" + e.ToString());
+            }
         }
 
         private async void fillSolvedGrid(string puzzle)
@@ -124,8 +135,8 @@ namespace sudokuSolver
                         j.Style.BackColor = Color.LightGray;
                         j.ReadOnly = true;
                     }
-                    await Task.Delay(500);
-                    letter++;                    
+                    await Task.Delay(200);
+                    letter++;
                 }
             }
             MessageBox.Show("Problem Solved!");
@@ -156,7 +167,7 @@ namespace sudokuSolver
             for (int i = 0; i < cMaxCell; i++)
             {
                 DataGridViewTextBoxColumn TxCol = new DataGridViewTextBoxColumn();
-                TxCol.MaxInputLength = 1;   // only one digit allowed in a cell
+                TxCol.MaxInputLength = 1;   // only one digit allowed in a cell               
                 DGV.Columns.Add(TxCol);
                 DGV.Columns[i].Name = "Col " + (i + 1).ToString();
                 DGV.Columns[i].Width = cColWidth;
@@ -181,7 +192,7 @@ namespace sudokuSolver
                 MessageBox.Show("Please Select a difficulty.");
             }
             else
-            {
+            {                
                 btn_Solve.Enabled = true;
                 inputText.Text = "";
 
@@ -281,27 +292,88 @@ namespace sudokuSolver
             inputText.Visible = true;
             inputText.Enabled = true;
             btn_import.Visible = true;
-            btn_import.Enabled = true;           
+            btn_import.Enabled = true;
+            btn_Solve.Enabled = false;
             resetBoard();
             string inputSudoku = inputText.Text;
         }
 
         private void btn_import_Click(object sender, EventArgs e)
         {
-            resetBoard();    
-            fillGrid();
-            btn_Solve.Enabled = true;            
+            btn_Solve.Enabled = true;
+            if (inputText.Text == "")
+            {
+                foreach (DataGridViewRow i in DGV.Rows)
+                {
+                    foreach (DataGridViewCell j in i.Cells)
+                    {
+                        if (j.Value == null)
+                        {
+                            puzzle += '0';
+                        }
+                        puzzle += j.Value;
+                    }
+                }
+                
+                fillGrid();
+                //answer = sudoku.solver(puzzle);
+                //fillSolvedGrid(answer);
+            }
+            else
+            {                
+                resetBoard();                
+                fillGrid();
+            }
+            if (answer == "False")
+            {
+                MessageBox.Show("That puzzle cannot be solved");
+                resetBoard();
+            }
         }
 
         private void btn_Solve_Click(object sender, EventArgs e)
         {
             fillSolvedGrid(answer);
-
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
+        }
+
+        private void checkToolStripMenuItem_Click(object sender, EventArgs e)
+        {           
+            DGV.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            DGV.Focus();
+            int count = 0;
+            foreach (DataGridViewRow i in DGV.Rows)
+            {
+                foreach (DataGridViewCell j in i.Cells)
+                {
+
+                    if (j.Selected == true && !j.ReadOnly)
+                    {                 
+                              
+                        if ((string)j.Value == answer.Substring(count, 1))
+                        {
+                            j.ReadOnly = true;
+                            j.Selected = false;
+                            j.Style.BackColor = Color.LightGray;
+                            j.Style.ForeColor = Color.Green;
+                        }
+                        else
+                        {
+                            j.Selected = false;
+                            j.ReadOnly = true;
+                            j.ReadOnly = false;
+                            j.Style.ForeColor = Color.Red;
+                            j.Style.SelectionForeColor = Color.Red;
+                            j.Selected = true;
+                        }
+                    }
+                    count++;
+                }
+            }
         }
 
         private void resetBoard()

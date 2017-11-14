@@ -10,6 +10,7 @@ namespace sudokuSolver
     {
         static int[,] grid2 = new int[9, 9];
         static string s;
+        Boolean solved;
 
         public Sudoku()
         {
@@ -212,7 +213,8 @@ namespace sudokuSolver
 
         public string solver(string str)
         {
-            try {
+            try
+            {
                 int[] vals = new int[81];
                 for (int q = 0; q < 81; q++)
                 {
@@ -249,13 +251,16 @@ namespace sudokuSolver
                             fininshedPuzzle += puzzle[row, col];
                         }
                     }
+                    //solved = true;
                     return fininshedPuzzle;
                 }
                 else
                 {
-                    return "False";
+                    //solved = false;
+                    return "False";                    
                 }
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return "False";
             }
